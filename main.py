@@ -59,15 +59,23 @@ class Message(ft.Text):
     def __init__(self, message_list):
         super().__init__()
         self.message_list = message_list
+        self.value = ""
         self.index = 0
         self.theme_style = ft.TextThemeStyle.HEADLINE_LARGE
 
     async def update_message(self):
+        # Iterate over all quotes
         while True:
-            self.value = self.message_list[self.index]
+            # Iterate over letters in one quotes
+            for letter in self.message_list[self.index]:
+                self.value = self.value + letter
+                self.update()
+                await asyncio.sleep(0.05)
+            # Increment index so it takes another quote from the list
+            # (% len() will set index back to '0' once we went through whole list
             self.index = (self.index + 1) % len(self.message_list)
-            self.update()
             await asyncio.sleep(6)
+            self.value = ""
 
 
 def main(page: ft.Page):
