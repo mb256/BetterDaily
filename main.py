@@ -70,11 +70,11 @@ class Message(ft.Text):
             for letter in self.message_list[self.index]:
                 self.value = self.value + letter
                 self.update()
-                await asyncio.sleep(0.05)
+                await asyncio.sleep(0.04)
             # Increment index so it takes another quote from the list
             # (% len() will set index back to '0' once we went through whole list
             self.index = (self.index + 1) % len(self.message_list)
-            await asyncio.sleep(6)
+            await asyncio.sleep(4)
             self.value = ""
 
 
@@ -89,3 +89,4 @@ def main(page: ft.Page):
 
 
 ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+#ft.app(target=main)
